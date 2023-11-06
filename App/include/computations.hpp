@@ -23,7 +23,6 @@ extern void aesniKeyFixedPtFixed();
 extern void aesniKeyVariesPtFixed();
 extern void aesOpenSSLKeyFixedPtFixed();
 extern void aesOpenSSLKeyVariesPtFixed();
-extern void aesniCPA();
 extern void aesOpenSSLKeyFixedPtFixedSGX();
 extern void aesOpenSSLKeyVariesPtFixedSGX();
 extern void aesOpenSSLKeyFixedPtFixedLoopedSGX();

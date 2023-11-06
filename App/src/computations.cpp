@@ -117,38 +117,6 @@ void aesOpenSSLKeyVariesPtFixed()
     }
 }
 
-void aesniCPA()
-{
-    std::string key = "123456789123456";
-    int const NUM_PLAINTEXTS = 1e6;
-    std::vector<std::string> plaintexts(NUM_PLAINTEXTS, std::string(16, '\0'));
-    auto fd = open("/dev/random", O_RDONLY);
-    for (int i = 0; i < NUM_PLAINTEXTS; i++) {
-        std::ignore = read(fd, plaintexts[i].data(), 16);
-    }
-    std::vector<std::vector<uint8_t>> ciphertexts;
-    close(fd);
-    for (int i = 0; i < NUM_PLAINTEXTS; i++) {
-        std::vector<uint8_t> ciphertext = customAES::aes128_encrypt_cbc_aesni(
-            std::vector<uint8_t>(
-                plaintexts[i].data(), plaintexts[i].data() + 16
-            ),
-            key.c_str()
-        );
-        ciphertexts.push_back(std::move(ciphertext));
-    }
-    // put the plaintexts and ciphertexts in a file
-    std::ofstream fout("aesniCPA.bin", std::ios::binary);
-    fout.write(key.data(), key.size());
-    for (int i = 0; i < NUM_PLAINTEXTS; i++) {
-        fout.write(
-            reinterpret_cast<char const *>(ciphertexts[i].data()),
-            ciphertexts[i].size()
-        );
-    }
-    fout.close();
-}
-
 void avx2Computation()
 {
     __m256i a = _mm256_set_epi32(8, 7, 6, 5, 4, 3, 2, 1);
@@ -298,7 +266,6 @@ std::unordered_map<std::string, std::function<Computation(void)>> const computat
     {"aesniKeyVariesPtFixed", []() { return Computation("aesniKeyVariesPtFixed", aesniKeyVariesPtFixed); }},
     {"aesOpenSSLKeyFixedPtFixed", []() { return Computation("aesOpenSSLKeyFixedPtFixed", aesOpenSSLKeyFixedPtFixed); }},
     {"aesOpenSSLKeyVariesPtFixed", []() { return Computation("aesOpenSSLKeyVariesPtFixed", aesOpenSSLKeyVariesPtFixed); }},
-    {"aesniCPA", []() { return Computation("aesniCPA", aesniCPA); }},
     {"aesOpenSSLKeyFixedPtFixedSGX", []() { return Computation("aesOpenSSLKeyFixedPtFixedSGX", aesOpenSSLKeyFixedPtFixedSGX); }},
     {"aesOpenSSLKeyVariesPtFixedSGX", []() { return Computation("aesOpenSSLKeyVariesPtFixedSGX", aesOpenSSLKeyVariesPtFixedSGX); }},
     {"aesOpenSSLKeyFixedPtFixedLoopedSGX", []() { return Computation("aesOpenSSLKeyFixedPtFixedLoopedSGX", aesOpenSSLKeyFixedPtFixedLoopedSGX); }},

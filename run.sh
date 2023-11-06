@@ -96,7 +96,9 @@ elif [[ $MODE == "t_test_separate" ]]; then
     comp2="${@:5:1}"
     python3 ../$SCRIPTS_FOLDER/t_test_separate.py $comp1 $comp2
 elif [[ $MODE == "cpa" ]]; then
-    python3 ../$SCRIPTS_FOLDER/cpa.py energy_readings.csv
+    # not implemented yet
+    echo "Not implemented yet"
+    exit 1
 # adding a new mode called "graph_separate"
 elif [[ $MODE == "graph_separate" ]]; then
     # pass all the computation names to the python script.
