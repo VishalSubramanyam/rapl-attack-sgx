@@ -1,0 +1,10 @@
+# Ignore venv and build folders
+venv/
+build/
+
+# Ignore all .txt files in the root dir except for CMake related
+/*.txt
+!CMakeLists.txt
+
+# Ignore pycache
+__pycache__/

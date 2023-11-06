@@ -1,0 +1,10 @@
+[
+    {
+        "name": "SGX Compiler Kit",
+        "compilers": {
+            "C": "/usr/bin/gcc-10",
+            "CXX": "/usr/bin/g++-10"
+        },
+        "environmentSetupScript": "/home/seal-ftp/subramanyam/environment"
+    }
+]

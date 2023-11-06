@@ -1,0 +1,14 @@
+enclave {
+    from "sgx_tsgxssl.edl" import *;
+    trusted {
+        /* Define ECALLs here. */
+        public void aes_openssl_sgx([user_check] const uint8_t * plaintext, int ptSize, [user_check] uint8_t * ciphertext, [user_check] const char *key);
+        public void aes_openssl_keyFixed_ptFixed_sgx_looped([user_check] const uint8_t * plaintext, int ptSize, [user_check] uint8_t * ciphertext, [user_check] const char *key);
+        public void aes_openssl_keyVaries_ptFixed_sgx_looped([user_check] const uint8_t * plaintext, int ptSize, [user_check] uint8_t * ciphertext, [user_check] char pregeneratedKeys[10000000][16]);
+    };
+
+    untrusted {
+        /* Define OCALLs here. */
+        void ocall_print_string([in, string] const char *str);
+    };
+};

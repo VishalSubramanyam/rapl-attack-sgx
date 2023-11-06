@@ -1,0 +1,18 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+BreakBeforeBraces: Linux
+AllowShortIfStatementsOnASingleLine: false
+IndentCaseLabels: false
+# Generate the clang-format rules if I want my function parameters
+# on a separate line. There needs to be a break after the opening parenthesis
+# and a break before the closing parenthesis
+# Like this:
+# myFunction(
+#     param1,
+#    param2
+# )
+AlignAfterOpenBracket: BlockIndent
+BinPackArguments: false
+BinPackParameters: false
+ExperimentalAutoDetectBinPacking: false
+AllowAllParametersOfDeclarationOnNextLine: false
